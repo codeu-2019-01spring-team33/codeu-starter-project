@@ -63,15 +63,16 @@ public class MessageServlet extends HttpServlet {
     }
 
     List<Message> messages = datastore.getMessages(user);
-    Gson gson = new Gson();
-    String json = gson.toJson(messages);
-
-    response.getWriter().println(json);
     String targetLanguageCode = request.getParameter("language");
 
     if(targetLanguageCode != null) {
       translateMessages(messages, targetLanguageCode);
     }
+    Gson gson = new Gson();
+    String json = gson.toJson(messages);
+
+    response.getWriter().println(json);
+    
     
   }
   private void translateMessages(List<Message> messages, String targetLanguageCode) {

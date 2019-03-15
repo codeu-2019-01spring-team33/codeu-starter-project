@@ -22,14 +22,16 @@ limitations under the License.
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
     <script src="/js/user-page-loader.js"></script>
+    <script src="/js/navigation-loader.js"></script>
   </head>
-  <body onload="buildUI();">
+  <body onload="buildUI(); buildLanguageLinks();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
     <h1 id="page-title">User Page</h1>
+    <ul id="languages"></ul>
 
     <form id="message-form" action="/messages" method="POST">
       Enter a new message:
