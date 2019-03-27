@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-
 package com.google.codeu.servlets;
-
+import com.google.codeu.data.Datastore;
+import com.google.codeu.data.Message;
+import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -24,31 +25,29 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List; // import just the List interface
+import java.util.ArrayList; // import just the ArrayList class
 
 /**
  * Redirects the user to the Google login page or their page if they're already logged in.
  */
 @WebServlet("/messagechart")
-public class LoginServlet extends HttpServlet {
+public class ChartServlet extends HttpServlet {
+    private Datastore datastore;
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    response.setContentType("application/json");
-    response.getWriter().println("slowly but surely");
-
-    UserService userService = UserServiceFactory.getUserService();
-
-    // If the user is already logged in, redirect to their page
-    if (userService.isUserLoggedIn()) {
-      String user = userService.getCurrentUser().getEmail();
-      response.sendRedirect("/user-page.html?user=" + user);
-      return;
-    }
-
-    // Redirect to Google login page. That page will then redirect back to /login,
-    // which will be handled by the above if statement.
-    String googleLoginUrl = userService.createLoginURL("/login");
-    response.sendRedirect(googleLoginUrl);
+  public void init() {
+    datastore = new Datastore();
   }
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    response.setContentType("application/json");
+    // The following line should match however you manipulated getMessages() in Step 1
+    List<Message> msgList = datastore.getMessages(null); 
+    Gson gson = new Gson();
+    String json = gson.toJson(msgList);
+    response.getWriter().println(json);
+  }
+
+
 }

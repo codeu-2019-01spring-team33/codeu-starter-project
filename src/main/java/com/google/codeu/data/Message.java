@@ -17,6 +17,8 @@
 package com.google.codeu.data;
 
 import java.util.UUID;
+import java.util.List; // import just the List interface
+import java.util.ArrayList; // import just the ArrayList class
 
 /** A single message posted by a user. */
 public class Message {
