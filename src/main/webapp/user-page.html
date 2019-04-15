@@ -78,11 +78,21 @@ This is going to be the refactoring of the code to stop using fetch for everythi
     <div id="about-me-container">Loading...</div>
       <div id="about-me-form" class="hidden">
       <form action="/about" method="POST">
-        <textarea name="about-me" placeholder="about me" rows=4 required></textarea>
+        About me: 
+        <textarea name="about-me" placeholder="Write a brief description about yourself here" rows=4 required></textarea>
+        <br/>
+        <input type="submit" value="Submit">
+      </form>
+      <form action="/about" method="POST">
+        My age:
+        <textarea name="about-me" placeholder="Enter age here" rows=1 required></textarea>
         <br/>
         <input type="submit" value="Submit">
       </form>
     </div>
+
+
+
 
     <div id="message-container">Loading...</div>
 
