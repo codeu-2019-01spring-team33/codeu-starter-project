@@ -89,6 +89,15 @@ public class Datastore {
     return results.countEntities(FetchOptions.Builder.withLimit(1000));
   }
 
+  public Iterable getContentConfidences(){
+    Query query = new Query("Message");
+    PreparedQuery results = datastore.prepare(query);
+    return results;
+  }
+
+
+
+
   /**
    * Gets messages posted by a specific user.
    *
