@@ -120,6 +120,9 @@ function buildMessageDiv(message) {
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   document.getElementById("page-title").innerHTML = parameterUsername + " page";
+  const button = document.getElementById("add-page");
+  button.action = "/about?link=" + window.location.href;
+  console.log(button.action);
   showMessageFormIfLoggedIn();
   fetchMessages();
 }
