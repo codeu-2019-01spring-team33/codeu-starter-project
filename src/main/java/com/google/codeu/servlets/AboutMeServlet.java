@@ -13,6 +13,8 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
 
+import com.google.gson.Gson;
+
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 /**
@@ -50,13 +52,14 @@ public class AboutMeServlet extends HttpServlet {
       return;
     }
 
-    response.getOutputStream().println(userData.getAboutMe());
+    Gson gson = new Gson();
+    String json = gson.toJson(userData);
+    response.getWriter().println(json);
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
-
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
       response.sendRedirect("/index.html");
@@ -64,12 +67,16 @@ public class AboutMeServlet extends HttpServlet {
     }
 
     String userEmail = userService.getCurrentUser().getEmail();
-    String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
+    String link = request.getParameter("link");
+    User returnUser = datastore.getUser(userEmail);
+    if (returnUser == null){
+      returnUser = new User(userEmail, ""); 
+    } 
+    if (!returnUser.getTopics().contains(link)){
+      returnUser.addTopic(link);
+    }
+    datastore.storeUser(returnUser);
 
-
-    User user = new User(userEmail, aboutMe);
-    datastore.storeUser(user);
-
-    response.sendRedirect("/user-page.html?user=" + userEmail);
+    response.sendRedirect(link);
   }
 }
