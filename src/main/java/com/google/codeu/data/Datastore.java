@@ -60,6 +60,7 @@ public class Datastore {
   Entity userEntity = new Entity("User", user.getEmail());
   userEntity.setProperty("email", user.getEmail());
   userEntity.setProperty("aboutMe", user.getAboutMe());
+  userEntity.setProperty("topics", user.getTopics());
   datastore.put(userEntity);
  }
  
@@ -78,6 +79,11 @@ public class Datastore {
   
   String aboutMe = (String) userEntity.getProperty("aboutMe");
   User user = new User(email, aboutMe);
+
+  ArrayList<String> topic = (ArrayList<String>) userEntity.getProperty("topics");
+  for(int i = 0; i < topic.size(); i++){
+    user.addTopic(topic.get(i));
+  }
   
   return user;
  }
