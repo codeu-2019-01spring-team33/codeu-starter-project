@@ -24,7 +24,7 @@ limitations under the License.
     <script src="/js/navigation-loader.js"></script>
     <script src="/js/main-topic-loader.js"></script>
   </head>
-  <body onload="addLoginOrLogoutLinkToNavigation();">
+  <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
@@ -32,11 +32,14 @@ limitations under the License.
     </nav>
     <h1 id="page-title">Topics</h1>
 
-    <p> Search for a topic (if no one has created this topic it will be created for you): </p>
+    <p> Search for a Chat Room (if no one has created this Chat Room it will be created for you): </p>
     <textarea name="text" id="topic-area"></textarea>
     <input type="submit" value="Submit" onclick = "createPage()">
 
-    <h2 id = "topics-title">Your Topics: </h2>
+    <h2 id = "topics-title">Your Chat Rooms: </h2>
+    <ul id="links">
+
+    </ul>
 
 
   </body>
