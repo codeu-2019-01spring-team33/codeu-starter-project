@@ -118,16 +118,16 @@ public class MessageServlet extends HttpServlet {
 
 
 
-  private double getSentimentScore(String text) throws IOException {
-  Document doc = Document.newBuilder()
-      .setContent(text).setType(Type.PLAIN_TEXT).build();
+//   private double getSentimentScore(String text) throws IOException {
+//   Document doc = Document.newBuilder()
+//       .setContent(text).setType(Type.PLAIN_TEXT).build();
 
-  LanguageServiceClient languageService = LanguageServiceClient.create();
-  Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
-  languageService.close();
+//   LanguageServiceClient languageService = LanguageServiceClient.create();
+//   Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+//   languageService.close();
 
-  return (double) sentiment.getScore();
-}
+//   return (double) sentiment.getScore();
+// }
 
 
   /** Stores a new {@link Message}. */
@@ -148,8 +148,8 @@ public class MessageServlet extends HttpServlet {
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = userText.replaceAll(regex, replacement);
     
-    double sentimentScore = getSentimentScore(textWithImagesReplaced);
-    Message message = new Message(user, textWithImagesReplaced, recipient, sentimentScore);
+    //double sentimentScore = getSentimentScore(textWithImagesReplaced);
+    Message message = new Message(user, textWithImagesReplaced, recipient, 0);
 
 
     BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
