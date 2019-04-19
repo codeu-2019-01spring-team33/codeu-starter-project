@@ -41,6 +41,8 @@ function addLoginOrLogoutLinkToNavigation() {
               '/rui-jie-hall.html?user=ruijieHall', 'Rui-Jie Hall')));
           navigationElement.appendChild(createListItem(createLink(
               '/matt-hall.html?user=mattHall', 'Matt Hall')));
+          navigationElement.appendChild(createListItem(createLink(
+              '/topics.html?user=' + loginStatus.username, 'Topics')));
 
           navigationElement.appendChild(
               createListItem(createLink('/logout', 'Logout')));
