@@ -15,10 +15,11 @@
  */
 
 // Get ?user=XYZ parameter value
-const urlParams = new URLSearchParams(window.location.search);
-const parameterUsername = urlParams.get('user');
 
-// URL must include ?user=XYZ parameter. If not, redirect to homepage.
-if (!parameterUsername) {
-  window.location.replace('/');
+function buildUI() {
+  setFormAction();
+}
+
+function setFormAction(){
+	document.getElementById("user-prof").action="/about?link=aiiwieidkd";
 }

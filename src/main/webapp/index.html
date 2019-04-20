@@ -21,29 +21,29 @@ limitations under the License.
     <title>CodeU 2019 Starter Project</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
+    <script src="/js/about-me-loader.js"></script>
   </head>
-  <body onload="addLoginOrLogoutLinkToNavigation();">
+  <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
     <h1 id = 'prof'>User Profile </h1>
-    <form id="user-prof"  method="POST" enctype="multipart/form-data" 
-        action = '/about'>
+    <form id="user-prof"  method="POST" >
       Name:
       <br/>
-      <textarea name="name" id="message-input"></textarea>
+      <input type = "text" name = "name" />
       <br/>
       Age:
       <br/>
-      <textarea name="age" id="message-input"></textarea>
+      <input type = "text" name ="age" />
       <br/>
       About Me:
       <br/>
-      <textarea name="aboutme" id="message-input"></textarea>
+      <input type = "text" name = "aboutme"/>
       <br/>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" />
 </form> 
     
   </body>
