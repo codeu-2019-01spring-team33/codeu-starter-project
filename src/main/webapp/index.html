@@ -21,20 +21,30 @@ limitations under the License.
     <title>CodeU 2019 Starter Project</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
+    <script src="/js/about-me-loader.js"></script>
   </head>
-  <body onload="addLoginOrLogoutLinkToNavigation();">
+  <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
-    <h1>(=^･ｪ･^=))ﾉ彡☆ CodeU Starter Project</h1>
-    <p>This is the CodeU starter project. Click the links above to login and visit your page.
-    You can post messages on your page, and you can visit other user pages if you have
-    their URL.</p>
-    <p>This is your code now! Feel free to make changes, and don't be afraid to get creative!
-    You could start by modifying this page to tell the world more about your team.</p>
-
-    <p> Hello world, this is a test done by Mario. Just checking to see how this whole appengine/maven thing works</p>
+    <h1 id = 'prof'>User Profile </h1>
+    <form id="user-prof"  method="POST" >
+      Name:
+      <br/>
+      <input type = "text" name = "name" />
+      <br/>
+      Age:
+      <br/>
+      <input type = "text" name ="age" />
+      <br/>
+      About Me:
+      <br/>
+      <input type = "text" name = "aboutme"/>
+      <br/>
+    <input type="submit" value="Submit" />
+</form> 
+    
   </body>
 </html>

@@ -67,16 +67,29 @@ public class AboutMeServlet extends HttpServlet {
     }
 
     String userEmail = userService.getCurrentUser().getEmail();
+    System.out.println(request.getParameter("link"));
     String link = request.getParameter("link");
+    System.out.println(request.getParameter("name"));
+    System.out.println(request.getParameter("age"));
+    System.out.println(request.getParameter("aboutme"));
+    //User returnUser = datastore.getUser(userEmail);
+    String name = request.getParameter("name");
+    int age = Integer.parseInt(request.getParameter("age"));
+    String aboutme = request.getParameter("aboutme");
     User returnUser = datastore.getUser(userEmail);
     if (returnUser == null){
-      returnUser = new User(userEmail, ""); 
-    } 
-    if (!returnUser.getTopics().contains(link)){
-      returnUser.addTopic(link);
+      returnUser = new User(userEmail, name, age, aboutme); 
+    } else{
+      returnUser.setAge(age);
+      returnUser.setName(name);
+      returnUser.setAboutMe(aboutme);
     }
+
+    // if (!returnUser.getTopics().contains(link)){
+    //   returnUser.addTopic(link);
+    // }
     datastore.storeUser(returnUser);
 
-    response.sendRedirect(link);
+    response.sendRedirect("/");
   }
 }
