@@ -28,13 +28,23 @@ limitations under the License.
         <li><a href="/">Home</a></li>
       </ul>
     </nav>
-    <h1>(=^･ｪ･^=))ﾉ彡☆ CodeU Starter Project</h1>
-    <p>This is the CodeU starter project. Click the links above to login and visit your page.
-    You can post messages on your page, and you can visit other user pages if you have
-    their URL.</p>
-    <p>This is your code now! Feel free to make changes, and don't be afraid to get creative!
-    You could start by modifying this page to tell the world more about your team.</p>
-
-    <p> Hello world, this is a test done by Mario. Just checking to see how this whole appengine/maven thing works</p>
+    <h1 id = 'prof'>User Profile </h1>
+    <form id="user-prof"  method="POST" enctype="multipart/form-data" 
+        action = '/about'>
+      Name:
+      <br/>
+      <textarea name="name" id="message-input"></textarea>
+      <br/>
+      Age:
+      <br/>
+      <textarea name="age" id="message-input"></textarea>
+      <br/>
+      About Me:
+      <br/>
+      <textarea name="aboutme" id="message-input"></textarea>
+      <br/>
+    <input type="submit" value="Submit">
+</form> 
+    
   </body>
 </html>

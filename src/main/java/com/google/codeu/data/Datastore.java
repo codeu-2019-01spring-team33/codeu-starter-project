@@ -59,7 +59,9 @@ public class Datastore {
  public void storeUser(User user) {
   Entity userEntity = new Entity("User", user.getEmail());
   userEntity.setProperty("email", user.getEmail());
-  userEntity.setProperty("aboutMe", user.getAboutMe());
+  userEntity.setProperty("aboutme", user.getAboutMe());
+  userEntity.setProperty("age", user.getAge());
+  userEntity.setProperty("name", user.getName());
   userEntity.setProperty("topics", user.getTopics());
   datastore.put(userEntity);
  }
@@ -77,8 +79,10 @@ public class Datastore {
    return null;
   }
   
-  String aboutMe = (String) userEntity.getProperty("aboutMe");
-  User user = new User(email, aboutMe);
+  String aboutme = (String) userEntity.getProperty("aboutme");
+  int age = (int) userEntity.getProperty("age"); 
+  String name = (String) userEntity.getProperty("name");
+  User user = new User(email, name, age, aboutme );
 
   ArrayList<String> topic = (ArrayList<String>) userEntity.getProperty("topics");
   for(int i = 0; i < topic.size(); i++){
@@ -160,10 +164,13 @@ public List<User> getUsers(String inputEmail) {
     try {
       String email = (String) entity.getProperty("email");
       //just to have it as a parameter in user
-      String aboutMe = (String) entity.getProperty("aboutMe");
+      String aboutme = (String) entity.getProperty("aboutme");
+      int age = (int) entity.getProperty("age"); 
+      String name = (String) entity.getProperty("name");
+  
 
       if (email.contains(inputEmail) && inputEmail != ""){
-        User user = new User(email, aboutMe);
+        User user = new User(email, name, age, aboutme );
         users.add(user);
       }
     } catch (Exception e) {
