@@ -76,6 +76,19 @@ function fetchMessages() {
   
 }
 
+
+function setButtonAction(){
+  fetch("/about").then((response) => {
+    return response.text();
+  }).then((aboutMe) => {
+    const button = document.getElementById("add-page");
+    json = JSON.parse(aboutMe);
+    params = "link=" + window.location.href + "&name=" + json.name + "&age=" + json.age;
+    params += "&aboutme=" + json.aboutme + "&redirect=" + window.location.href;
+    button.action = "/about?" + params;
+    console.log(button.action);
+  });
+}
 /**
  * Builds an element that displays the message.
  * @param {Message} message
@@ -120,9 +133,8 @@ function buildMessageDiv(message) {
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   document.getElementById("page-title").innerHTML = parameterUsername + " page";
-  const button = document.getElementById("add-page");
-  button.action = "/about?link=" + window.location.href;
-  console.log(button.action);
+  //console.log(button.action);
+  setButtonAction();
   showMessageFormIfLoggedIn();
   fetchMessages();
 }
