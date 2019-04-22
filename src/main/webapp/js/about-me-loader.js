@@ -17,9 +17,47 @@
 // Get ?user=XYZ parameter value
 
 function buildUI() {
-  setFormAction();
+	showAboutMeFormIfLoggedIn();
+	setFormAction();
 }
 
+function showAboutMeFormIfLoggedIn() {
+  fetch('/login-status')
+      .then((response) => {
+        return response.json();
+      })
+      .then((loginStatus) => {
+        if (loginStatus.isLoggedIn) {
+          checkIfExists();
+          document.getElementById('user-prof').style.visibility="visible";
+        } else {
+        	document.getElementById('user-prof').style.visibility="hidden";
+        }
+      });
+}
+
+function checkIfExists(){
+	url = '/about?';
+	fetch(url)
+	    .then((response) => {
+	      return response.json();
+	    })
+	    .then((user) => {
+	    	if (user == null){
+	    		const params = new URLSearchParams();
+	    		params.append('name', '');
+	    		params.append('age', 0);
+	    		params.append('aboutme', '');
+	    		params.append('redirect', window.location.href);
+	    		fetch('/about', {
+	    			method: 'POST',
+	    			body: params
+	    		});
+	    	}
+	    });
+}
+
+
 function setFormAction(){
-	document.getElementById("user-prof").action="/about?link=aiiwieidkd";
+	document.getElementById("user-prof").action="/about?redirect=" + window.location.href;
 }

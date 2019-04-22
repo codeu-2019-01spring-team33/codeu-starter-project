@@ -133,18 +133,18 @@ function generateError(){
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
-function showMessageFormIfLoggedIn() {
-  fetch('/login-status')
-      .then((response) => {
-        return response.json();
-      })
-      .then((loginStatus) => {
-        if (loginStatus.isLoggedIn &&
-          loginStatus.username == parameterUsername) {
-          document.getElementById('about-me-form').classList.remove('hidden');
-        }
-      });
-}
+// function showMessageFormIfLoggedIn() {
+//   fetch('/login-status')
+//       .then((response) => {
+//         return response.json();
+//       })
+//       .then((loginStatus) => {
+//         if (loginStatus.isLoggedIn &&
+//           loginStatus.username == parameterUsername) {
+//           document.getElementById('about-me-form').classList.remove('hidden');
+//         }
+//       });
+// }
 
 function fetchImageUploadUrlAndShowForm() {
   const contents = document.getElementById("recipient-input");
@@ -247,7 +247,7 @@ function fetchAboutMe(){
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   setPageTitle();
-  showMessageFormIfLoggedIn();
+  //showMessageFormIfLoggedIn();
   fetchMessages();
-  fetchAboutMe();
+  //fetchAboutMe();
 }
