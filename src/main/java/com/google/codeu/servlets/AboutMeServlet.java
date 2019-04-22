@@ -39,19 +39,25 @@ public class AboutMeServlet extends HttpServlet {
 
     response.setContentType("text/html");
 
-    String user = request.getParameter("user");
+    UserService userService = UserServiceFactory.getUserService();
+
+    String user = userService.getCurrentUser().getEmail();
+
 
     if(user == null || user.equals("")) {
       // Request is invalid, return empty response
+      response.getWriter().println("invalid user");
       return;
     }
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getAboutMe() == null) {
-      return;
-    }
+    // if(userData == null || userData.getAboutMe() == null) {
+    //   response.getWriter().println("no user found");
+    //   return;
+    // }
 
+    //System.out.println("The users name is " + userData.getName());
     Gson gson = new Gson();
     String json = gson.toJson(userData);
     response.getWriter().println(json);
@@ -67,15 +73,12 @@ public class AboutMeServlet extends HttpServlet {
     }
 
     String userEmail = userService.getCurrentUser().getEmail();
-    System.out.println(request.getParameter("link"));
     String link = request.getParameter("link");
-    System.out.println(request.getParameter("name"));
-    System.out.println(request.getParameter("age"));
-    System.out.println(request.getParameter("aboutme"));
-    //User returnUser = datastore.getUser(userEmail);
     String name = request.getParameter("name");
-    int age = Integer.parseInt(request.getParameter("age"));
+    String age2 = request.getParameter("age");
+    int age  = Integer.parseInt(age2);
     String aboutme = request.getParameter("aboutme");
+    String redirect = request.getParameter("redirect");
     User returnUser = datastore.getUser(userEmail);
     if (returnUser == null){
       returnUser = new User(userEmail, name, age, aboutme); 
@@ -85,11 +88,11 @@ public class AboutMeServlet extends HttpServlet {
       returnUser.setAboutMe(aboutme);
     }
 
-    // if (!returnUser.getTopics().contains(link)){
-    //   returnUser.addTopic(link);
-    // }
+    if (link != null && !returnUser.getTopics().contains(link)){
+      returnUser.addTopic(link);
+    }
     datastore.storeUser(returnUser);
 
-    response.sendRedirect("/");
+    response.sendRedirect(redirect);
   }
 }
