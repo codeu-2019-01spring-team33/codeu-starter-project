@@ -80,12 +80,10 @@ public class Datastore {
   }
   
   String aboutme = (String) userEntity.getProperty("aboutme");
-  System.out.println("LKSJFLAJFLAJS:FSA");
-  System.out.println(userEntity.getProperty("age").getClass().getName());
   long age = (long) userEntity.getProperty("age"); 
   int age2 = (int) age;
   String name = (String) userEntity.getProperty("name");
-  User user = new User(email, name, age2, aboutme );
+  User user = new User(email, name, age2, aboutme);
 
   ArrayList<String> topic = (ArrayList<String>) userEntity.getProperty("topics");
   if (topic != null){
@@ -172,7 +170,8 @@ public List<User> getUsers(String inputEmail) {
       //just to have it as a parameter in user
       String aboutme = (String) entity.getProperty("aboutme");
 
-      int age = (int) entity.getProperty("age"); 
+      long age2 = (long) entity.getProperty("age"); 
+      int age = (int) age2;
       String name = (String) entity.getProperty("name");
   
 
