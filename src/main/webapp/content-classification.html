@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Classification</title>
+  <link rel="stylesheet" href="/css/main.css">
+  
+  <script>
+    // Fetch stats and display them in the page.
+    function fetchClassifications(){
+      const url = '/content-classification';
+      fetch(url).then((response) => {
+        return response.json();
+      }).then((confidences) => {
+        const confContainer = document.getElementById('conf-container');
+        confContainer.innerHTML = '';
+
+        const confidenceClassificationElement = buildconfidenceElement('confidences: ' + confidences.confidenceClassification);
+        confContainer.appendChild(confidenceClassificationElement);
+      });
+    }
+
+    function buildconfidenceElement(confidenceString){
+     const confidenceElement = document.createElement('p');
+     confidenceElement.appendChild(document.createTextNode(confidenceString));
+     return confidenceElement;
+    }
+
+    // Fetch data and populate the UI of the page.
+    function buildUI(){
+     fetchClassifications();
+    }
+  </script>
+</head>
+<body onload="buildUI()">
+<div id="content">
+  <h1>Site Classifications</h1>
+  <hr/>
+  <div id="conf-container">Loading...</div>
+</div>
+</body>
+</html>
